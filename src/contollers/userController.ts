@@ -134,7 +134,6 @@ class userController {
       res.status(500).json(error);
     }
   };
-
   //get all users (admin)
   public static allUsers = async (req: Request, res: Response) => {
     try {
@@ -146,5 +145,4 @@ class userController {
     }
   };
 }
-
 export default userController;

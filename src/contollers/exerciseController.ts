@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 
 const exerciseRepository = AppDataSource.manager.getRepository(Exercise);
-
 class excerciseController {
   public static createExercise = async (req: Request, res: Response) => {
     try {

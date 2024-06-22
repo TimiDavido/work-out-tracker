@@ -29,5 +29,6 @@ export class User {
   sessions: Session[];
 
   @OneToMany(() => Comment, (comment) => comment.user)
-  comment: Comment[];
+  comments: Comment[];
+
 }
