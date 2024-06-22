@@ -27,7 +27,7 @@ export class Workout {
     @ManyToOne(() => Session, (session) => session.workouts)
     session: Session
 
-    @ManyToOne(() => Exercise, (exercise) => exercise.workout)
+    @OneToMany(() => Exercise, (exercise) => exercise.workout)
     exercises: Exercise[]
 
     @OneToMany(() => Comment, (comment) => comment.workout)

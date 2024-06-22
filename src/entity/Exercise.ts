@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne} from "typeorm";
 import { Workout } from "./Workout";
 
 @Entity()
@@ -12,6 +12,6 @@ export class Exercise{
     @Column({nullable: true})
     description: string
 
-    @OneToMany(() => Workout, (workout) => workout.session)
+    @ManyToOne(() => Workout, (workout) => workout.session)
     workout: Workout
 }
