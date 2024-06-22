@@ -94,7 +94,7 @@ class sessionController {
             msg: "Could not delete session because session was not found.",
           });
       }
-      await workoutRepository.remove(session.workout)
+      await workoutRepository.remove(session.workouts)
       await sessionRepository.remove(session);
       res.status(200).json({ msg: "Session deleted successfully." });
     } catch (error) {
@@ -102,8 +102,5 @@ class sessionController {
       res.status(500).json({error})
     }
   };
-
- 
 }
-
 export default sessionController;

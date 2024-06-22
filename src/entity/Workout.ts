@@ -14,13 +14,17 @@ export class Workout {
     @Column()
     sets: number
 
-    @Column({default: 'not done'})
-    status: string
+    @Column({
+        type: 'enum',
+        enum: ['completed', 'not done'],
+        default: 'not done'
+      })
+      status: 'completed' | 'not done';
 
     @Column({nullable: true})
     size : string
 
-    @ManyToOne(() => Session, (session) => session.workout)
+    @ManyToOne(() => Session, (session) => session.workouts)
     session: Session
 
     @ManyToOne(() => Exercise, (exercise) => exercise.workout)

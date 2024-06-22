@@ -3,23 +3,22 @@ import { AppDataSource } from "../data-source";
 import { Session } from "../entity/Session";
 
 const sessionRepository = AppDataSource.manager.getRepository(Session);
-
 class reportController {
   public static getReport = async (req: Request, res: Response) => {
     try {
       const sessionId = Number(req.params.id);
       const session = await sessionRepository.findOne({
         where: { id: sessionId },
-        relations: ["workout"],
+        relations: ["workouts"],
       });
 
       if (!session) {
         return res.status(404).json({ msg: "Session not found ❌" });
       }
 
-      const totalWorkouts = session.workout.length;
-      const completedWorkouts = session.workout.filter(
-        (workout) => workout.status === "done"
+      const totalWorkouts = session.workouts.length;
+      const completedWorkouts = session.workouts.filter(
+        (workout) => workout.status === "completed"
       ).length;
 
       if (totalWorkouts === 0) {
@@ -36,5 +35,4 @@ class reportController {
     }
   };
 }
-
 export default reportController;

@@ -6,7 +6,7 @@ import { Comment } from "../entity/Comment";
 
 const workoutRepository = AppDataSource.manager.getRepository(Workout);
 const sessionRepository = AppDataSource.getRepository(Session);
-const commentRepository = AppDataSource.getRepository(Comment)
+const commentRepository = AppDataSource.getRepository(Comment);
 
 class workoutController {
   //create workout for a session with session ID
@@ -46,12 +46,12 @@ class workoutController {
       const id = Number(req.params.id);
       const session = await sessionRepository.findOne({
         where: { id },
-        relations: ["workout", "workout.exercises"],
+        relations: ["workouts", "workouts.exercises"],
       });
       if (!session) {
         return res.status(404).json({ msg: "Session not found ❌" });
       }
-      res.status(200).json(session.workout);
+      res.status(200).json(session.workouts);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });
@@ -65,14 +65,13 @@ class workoutController {
       if (!workout) {
         res.status(404).json({ msg: "Workout not found" });
       }
-      await commentRepository.delete({workout : {id}})
+      await commentRepository.delete({ workout: { id } });
       await workoutRepository.delete(workout);
-      res.status(200).json("Workout deleted successfully")
+      res.status(200).json("Workout deleted successfully");
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });
     }
   };
 }
-
 export default workoutController;

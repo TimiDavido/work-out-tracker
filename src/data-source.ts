@@ -5,19 +5,19 @@ import { Workout } from "./entity/Workout"
 import { Session } from "./entity/Session"
 import { Exercise } from "./entity/Exercise"
 import { Comment } from "./entity/Comment"
-import { PASSOWRD } from "./config"
-import { USERNAME } from "./config"
+import { PASSOWRD, USERNAME, HOST, DB_PORT, DATABASE, SYNCHRONIZE, LOGGING } from "./config"
+
 
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
+    host: HOST,
+    port: Number(DB_PORT),
     username: USERNAME,
     password: PASSOWRD,
-    database: "workout-tracker",
-    synchronize: true,      
-    logging: false,
+    database: DATABASE,
+    synchronize: Boolean(SYNCHRONIZE),      
+    logging: Boolean(LOGGING),
     entities: [User, Workout, Session, Exercise, Comment],
     migrations: [],
     subscribers: [],
