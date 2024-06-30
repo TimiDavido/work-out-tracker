@@ -1,5 +1,5 @@
 import { AppDataSource } from "./data-source";
-import express from "express";
+import express, { Request, Response } from "express";
 import { PORT } from "./config";
 import bodyParser from "body-parser";
 import userRoute from "./routes/userRoute";
@@ -13,6 +13,9 @@ import reportRoute from "./routes/reportRoute"
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+app.get('/', (req: Request,res: Response) => {
+  res.status(200).send("your app is runniny oh you mean my app, yeah")
+})
 app.use(userRoute);
 app.use(sessionRoute)
 app.use(exerciseRoute)
@@ -29,8 +32,6 @@ const main = async () => {
       console.log(`Now running on port ${PORT}`);
     });
 
-    module.exports = { AppDataSource };
-    
   } catch (error) {
     console.error(error);
     throw new Error("Unable to connect to db");
