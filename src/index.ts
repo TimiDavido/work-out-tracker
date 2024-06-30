@@ -32,8 +32,6 @@ const main = async () => {
       console.log(`Now running on port ${PORT}`);
     });
 
-    module.exports = { AppDataSource };
-    
   } catch (error) {
     console.error(error);
     throw new Error("Unable to connect to db");
